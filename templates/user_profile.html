@@ -1,0 +1,599 @@
+<html>
+
+<head>
+    <title>CareWheel</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script>
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        }
+        function displayPlot() {
+            var strWindowFeatures = "location=yes,height=280,width=820,scrollbars=yes,status=yes";
+            var URL = "../data/scatter_" + document.getElementById("selector").selectedIndex + ".html";
+            var win = window.open(URL, "_blank", strWindowFeatures);
+        }
+        function openTab(cityName) {
+            var i;
+            var x = document.getElementsByClassName("block");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(cityName).style.display = "block";
+        }
+    </script>
+    <style>
+        body {
+            background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+        }
+
+        .emp-profile {
+            padding: 3%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            border-radius: 0.5rem;
+            background: #fff;
+        }
+
+        .selector {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .profile-img {
+            text-align: center;
+        }
+
+        .profile-img img {
+            width: 70%;
+            height: 210px;
+        }
+
+        .profile-img .file {
+            position: relative;
+            overflow: hidden;
+            margin-top: -20%;
+            width: 70%;
+            border: none;
+            border-radius: 0;
+            font-size: 15px;
+            background: #212529b8;
+        }
+
+        .profile-img .file input {
+            position: absolute;
+            opacity: 0;
+            right: 0;
+            top: 0;
+        }
+
+        .profile-head h5 {
+            color: #333;
+        }
+
+        .profile-head h6 {
+            color: #0062cc;
+        }
+
+        .profile-edit-btn {
+            border: none;
+            border-radius: 1.5rem;
+            width: 70%;
+            padding: 2%;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+        }
+
+        .proile-rating {
+            font-size: 12px;
+            color: #818182;
+            margin-top: 5%;
+        }
+
+        .proile-rating span {
+            color: #495057;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .profile-head .nav-tabs {
+            margin-bottom: 5%;
+        }
+
+        .profile-head .nav-tabs .nav-link {
+            font-weight: 600;
+            border: none;
+        }
+
+        .profile-head .nav-tabs .nav-link.active {
+            border: none;
+            border-bottom: 2px solid #0062cc;
+        }
+
+        .profile-work {
+            padding-left: 15%;
+            height: 1000px;
+            overflow: scroll;
+        }
+
+        .profile-work p {
+            font-size: 12px;
+            color: #818182;
+            font-weight: 600;
+            margin-top: 5%;
+        }
+
+        .profile-work a {
+            text-decoration: none;
+            color: #495057;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .profile-work ul {
+            list-style: none;
+        }
+
+        .profile-tab label {
+            font-weight: 600;
+        }
+
+        .profile-tab p {
+            font-weight: 600;
+            color: #0062cc;
+        }
+
+        #properties {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #properties td,
+        #properties th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #properties tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #properties tr:hover {
+            background-color: #ddd;
+        }
+
+        #properties th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Time', 'HR', 'Temp', 'RespRate', 'Urine'],
+                ['4:00', 73, 35.1, 19, 100],
+                ['4:05', 77, 35.6, 19, 60],
+                ['4:10', 60, 37.8, 18, 30],
+                ['4:15', 62, 38.1, 19, 170],
+                ['4:20', 80, 37.6, 20, 60],
+                ['4:25', 74, 36.9, 20, 170],
+                ['4:30', 73, 37.3, 17, 120],
+                ['4:35', 64, 37.1, 15, 80],
+                ['4:40', 64, 37.9, 14, 100],
+                ['4:45', 66, 38.1, 15, 170],
+                ['4:50', 61, 37.6, 15, 120],
+                ['4:55', 65, 36.9, 12, 80],
+                ['5:00', 77, 37.3, 15, 100],
+                ['5:05', 60, 37.1, 15, 60],
+                ['5:10', 62, 37.9, 15, 80],
+                ['5:15', 73, 38.1, 12, 50],
+                ['5:20', 66, 38.2, 14, 60],
+                ['5:25', 71, 37.9, 13, 120],
+                ['5:30', 67, 37.6, 18, 140],
+                ['5:35', 80, 37.8, 13, 80],
+                ['5:40', 78, 38.1, 12, 70],
+                ['5:45', 85, 38.1, 20, 60],
+                ['5:50', 83, 38.1, 15, 30],
+                ['5:55', 84, 38.1, 24, 66],
+                ['6:00', 73, 38.1, 16, 70],
+                ['6:05', 77, 38.1, 19, 60],
+                ['6:10', 73, 38.1, 18, 62],
+                ['6:15', 73, 38.1, 16, 74],
+                ['6:20', 84, 38.1, 18, 60],
+                ['6:25', 86, 38.1, 20, 60],
+            ]);
+
+            var options = {
+                title: 'Timeline Plot',
+                hAxis: { title: 'Year', titleTextStyle: { color: '#333' } },
+                vAxis: { minValue: 0 }
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container emp-profile">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="{{ pic }}"
+                        alt="" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="profile-head">
+                    <br>
+                    <h3>{{ name }}</h3>
+                    <h6>{{ desc }}</h6>
+                    <p class="proile-rating">Recovery: <span>87%</span> Mood: <span>{{ mood }}%</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2 style="margin-left: 30px;" >Posts</h2>
+                <div class="profile-work">
+                    {% for item in posts %}
+                        {% if item.media != None %}
+                        <a
+                            href="{{ item.media }}">
+                            <img src="{{ item.media }}"
+                                width="240px" height="160px" alt="" />
+                        </a><br>
+                        {% endif %}
+                        <span title="{{ item.date_posted }}"> {{ item.title }} {{ item.content }} </span>
+                        <hr>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div id="About" class="w3-container city" style="display: block">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>User Id</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{ username }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Mobile</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{ mobile }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Guardian Mobile</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{ gmobile }}</p>
+                        </div>
+                    </div>
+                    <br>
+                    <table id="properties">
+                        <tr>
+                            <th>Parameter(s)</th>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                        {% if parameter.p_albumin > -1 %}
+                        <tr>
+                            <td>Albumin</td>
+                            <td>{{ parameter.p_albumin }} g/dL</td>
+                            <td>3.4 to 5.4 g/dL</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_alp > -1 %}
+                        <tr>
+                            <td>Alkaline Phosphate</td>
+                            <td>{{ parameter.p_alp }} IU/L</td>
+                            <td>20 to 140 IU/L</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_alt > -1 %}
+                        <tr>
+                            <td>Alanine transaminase</td>
+                            <td>{{ parameter.p_alt }} IU/L</td>
+                            <td>29 to 33 IU/L</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_ast > -1 %}
+                        <tr>
+                            <td>Aspartate transaminase</td>
+                            <td>{{ parameter.p_alt }} IU/L</td>
+                            <td>10 to 40 IU/L</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_bilirubin > -1 %}
+                        <tr>
+                            <td>Bilirubin</td>
+                            <td>{{ parameter.p_bilirubin }} mg/dL</td>
+                            <td>0 to 0.4 mg/dL</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_bun > -1 %}
+                        <tr>
+                            <td>Blood Urea Nitrogen</td>
+                            <td>{{ parameter.p_bun }} mg/dL</td>
+                            <td>7 to 20 mg/dL</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_cholestrol > -1 %}
+                        <tr>
+                            <td>Cholestrol</td>
+                            <td>{{ parameter.p_cholestrol }} mg/dL</td>
+                            <td>200 and 239 mg/dL is considered boderline, anything above is risky</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_diasabp > -1 %}
+                        <tr>
+                            <td>Invasive diastolic arterial blood pressure</td>
+                            <td>{{ parameter.p_diasabp }} mmHg</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_fio2 > -1 %}
+                        <tr>
+                            <td>Fractional inspired O2</td>
+                            <td>{{ parameter.p_fio2 }}</td>
+                            <td>0 to 1</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_gcs > -1 %}
+                        <tr>
+                            <td>Glasgow Coma Score</td>
+                            <td>{{ parameter.p_gcs }}</td>
+                            <td>3 to 15</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_glucose > -1 %}
+                        <tr>
+                            <td>Glucose</td>
+                            <td>{{ parameter.p_glucose }} mg/dL</td>
+                            <td>70 to 130 mg/dL</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_hco3 > -1 %}
+                        <tr>
+                            <td>Bicarbonate</td>
+                            <td>{{ parameter.p_hco3 }} mmol/L</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_hct > -1 %}
+                        <tr>
+                            <td>Hematocrit</td>
+                            <td>{{ parameter.p_hct }}</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_hr > -1 %}
+                        <tr>
+                            <td>Heart Rate</td>
+                            <td>{{ parameter.p_hr }} BPM</td>
+                            <td>60 to 100 BPM for babies less than 1 year old upto 160 BPM is also normal</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_hr > -1 %}
+                        <tr>
+                            <td>Closed Distance</td>
+                            <td>110 cm</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_k > -1 %}
+                        <tr>
+                            <td>Potassium</td>
+                            <td>{{ parameter.p_hct }} mEq/L</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_lactate > -1 %}
+                        <tr>
+                            <td>Lactate</td>
+                            <td>{{ parameter.p_lactate }} mmol/L</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_mg > -1 %}
+                        <tr>
+                            <td>Magnesium</td>
+                            <td>{{ parameter.p_mg }} mmol/L</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_map > -1 %}
+                        <tr>
+                            <td>MAP</td>
+                            <td>{{ parameter.p_map }} mmHg</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_mechvent > -1 %}
+                        <tr>
+                            <td>Mechanical ventilation respiration</td>
+                            <td>{{ parameter.p_mechvent }}</td>
+                            <td>0 false, 1 true</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_na > -1 %}
+                        <tr>
+                            <td>Sodium</td>
+                            <td>{{ parameter.p_na }} mEq/L</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_nidiasabp > -1 %}
+                        <tr>
+                            <td>Non-invasive diastolic arterial blood pressure</td>
+                            <td>{{ parameter.p_nidiasabp }} mmHg</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_nimap > -1 %}
+                        <tr>
+                            <td>Non-invasive mean arterial blood pressure</td>
+                            <td>{{ parameter.p_nimap }} mmHg</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_nisysabp > -1 %}
+                        <tr>
+                            <td>Non-invasive systolic arterial blood pressure</td>
+                            <td>{{ parameter.p_nisysabp }} mmHg</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_paco2 > -1 %}
+                        <tr>
+                            <td>partial pressure of arterial CO2</td>
+                            <td>{{ parameter.p_paco2 }} mmHg</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_pao2 > -1 %}
+                        <tr>
+                            <td>partial pressure of arterial O2</td>
+                            <td>{{ parameter.p_pao2 }} mmHg</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_ph > -1 %}
+                        <tr>
+                            <td>Arterial pH</td>
+                            <td>{{ parameter.p_ph }}</td>
+                            <td>0 to 14</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_platelets > -1 %}
+                        <tr>
+                            <td>Platelets</td>
+                            <td>{{ parameter.p_platelets }} cells/nL</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_resprate > -1 %}
+                        <tr>
+                            <td>Respiration rate</td>
+                            <td>{{ parameter.p_resprate }} bpm</td>
+                            <td>16 to 34 bpm</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_sao2 > -1 %}
+                        <tr>
+                            <td>O2 saturation in hemoglobin</td>
+                            <td>{{ parameter.p_sao2 }}</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_sysabp > -1 %}
+                        <tr>
+                            <td>Invasive systolic arterial blood pressure</td>
+                            <td>{{ parameter.p_sysabp }} mmHg</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_temp > -1 %}
+                        <tr>
+                            <td>Temperature</td>
+                            <td>{{ parameter.p_temp }} °C</td>
+                            <td>37.2 °C</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_tropl > -1 %}
+                        <tr>
+                            <td>Troponin-I</td>
+                            <td>{{ parameter.p_tropl }} μg/L</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_tropt > -1 %}
+                        <tr>
+                            <td>Troponin-T</td>
+                            <td>{{ parameter.p_tropt }} μg/L</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_urine > -1 %}
+                        <tr>
+                            <td>Urine</td>
+                            <td>{{ parameter.p_urine }} mL</td>
+                            <td>50 to 160 mL</td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_wbc > -1 %}
+                        <tr>
+                            <td>WBC</td>
+                            <td>{{ parameter.wbc }} cells/nL</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_weight > -1 %}
+                        <tr>
+                            <td>Weight</td>
+                            <td>{{ parameter.p_weight }} KG</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                        {% if parameter.p_height > -1 %}
+                        <tr>
+                            <td>Height</td>
+                            <td>{{ parameter.p_height }} cm</td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                    <div id="chart_div" style="width: 130%; height: 400px; margin-left: -100px;"></div>
+                    <br>
+                    <div class="row">
+                        <p>Compare properties</p>
+                        <center>
+                            <select id="selector" class="selector">
+                                <option value="bun">BUN</option>
+                                <option value="creatinine">Creatinine</option>
+                                <option value="gcs">GCS</option>
+                                <option value="glucose">Glucose</option>
+                                <option value="hct">HCT</option>
+                                <option value="hr">HR</option>
+                                <option value="mg">Mg</option>
+                                <option value="na">Na</option>
+                                <option value="platelets">Platelets</option>
+                                <option value="temp">Temperature</option>
+                                <option value="urine">Urine</option>
+                                <option value="wbc">WBC</option>
+                                <option value="weight">Weight</option>
+                            </select>
+                            <input type="button" onclick="displayPlot()" value="Show Plot" />
+                        </center>
+                    </div>
+                    <br>
+                    <iframe src="../data/report.html" width=100% frameborder="0" scrolling="no"
+                        onload="resizeIframe(this)"></iframe>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+import requests
+requests.post('http://127.0.0.1:5000/api/assign_user/bb411a9c5f6631634a342779b28cc612', json={"username":"ankitpriyarup", "fullname":"Ankit Priyarup", "mobile":"+919818865785", "publickey":"qazwsxedc", "privatekey":"qazwsxedc", "guardianmobile":"+919818865785", "description":"Patient has a background of cardiological and neural problem. Never been a smoker or alchoholic. Currently 65 years old.", "picture":"https://avatars0.githubusercontent.com/u/31309984?s=460&v=4"})
+requests.post('http://127.0.0.1:5000/api/assign_supervisor/bb411a9c5f6631634a342779b28cc612', json={"username":"anukriti", "fullname":"Anukriti Kumar", "mobile":"+919650977878", "privatekey":"qazwsxedc", "description":"Expert in this field for over 10 years. Just the best!", "userAssosiated":"ankitpriyarup"})
+requests.post('http://127.0.0.1:5000/api/post_review/bb411a9c5f6631634a342779b28cc612', json={"username":"anukriti", "rate":5, "title":"BEST", "content":"Amazing, recommend to everyone!"})
+requests.post('http://127.0.0.1:5000/api/post_review/bb411a9c5f6631634a342779b28cc612', json={"username":"anukriti", "rate":5})
+requests.post('http://127.0.0.1:5000/api/post_review/bb411a9c5f6631634a342779b28cc612', json={"username":"anukriti", "rate":4})
+requests.post('http://127.0.0.1:5000/api/post_update/bb411a9c5f6631634a342779b28cc612', json={"username":"ankitpriyarup", "key":"qazwsxedc", "hr":"100"})
+requests.post('http://127.0.0.1:5000/api/post_update/bb411a9c5f6631634a342779b28cc612', json={"username":"ankitpriyarup", "key":"qazwsxedc", "urine":"60"})
+requests.post('http://127.0.0.1:5000/api/post_update/bb411a9c5f6631634a342779b28cc612', json={"username":"ankitpriyarup", "key":"qazwsxedc", "temp":"38.1"})
+requests.post('http://127.0.0.1:5000/api/post_update/bb411a9c5f6631634a342779b28cc612', json={"username":"ankitpriyarup", "key":"qazwsxedc", "resprate":"20"})
+requests.post('http://127.0.0.1:5000/api/post_task/bb411a9c5f6631634a342779b28cc612', json={"username":"ankitpriyarup", "key":"qazwsxedc", "title":"Fun time!", "msg":"Had a blast at childrens' park", "media":"https://i.dailymail.co.uk/i/pix/2015/07/23/21/2AC9CA3000000578-3172612-image-a-1_1437682338900.jpg"})
+requests.post('http://127.0.0.1:5000/api/post_task/bb411a9c5f6631634a342779b28cc612', json={"username":"ankitpriyarup", "key":"qazwsxedc", "title":"", "msg":"*Unnatural trend in heart rate detected*"})
