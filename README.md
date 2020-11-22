@@ -10,8 +10,9 @@ sudo apt-get install python-virtualenv7
 
 git clone https://github.com/ankitpriyarup/care-wheel.git
 cd care-wheel
-virtualenv -p python3 env
-source env/bin/activate
+sudo pip3 install virtualenv
+virtualenv .env
+source .env/bin/activate
 pip3 install -r requirements.txt
 
 # Install External dependencies
